@@ -1,0 +1,113 @@
+/*
+ * Code by Chris Chappell
+ *
+ * CSS for chappc-lab3part1.html
+ */
+
+/* set fonts for the whole document */
+html
+{
+  font-family: "Helvetica" "Ariel" "Ubuntu" sans-serif;
+}
+
+/* get rid of preset paddings Chrome creates for unordered lists */
+ul
+{
+  padding: 0px;
+}
+
+/* remove bullet points from the list items */
+li
+{
+  list-style-type: none;
+}
+
+/* make the playlist look fancy */
+.row-container
+{
+  width: 1190px;
+  margin: auto;
+  border: 3px #bbb solid;
+  border-radius: 3px;
+  background-color: #ccc;
+  box-shadow: 0px 0px 10px #888;
+}
+
+/* make each row display like a tr and look fancy with gradients */
+.row
+{
+  display: table-row;
+  background: -webkit-linear-gradient(#eee, #ddd); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#eee, #ddd); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#eee, #ddd); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#eee, #ddd); /* Standard syntax */;
+  padding: 5px;
+}
+
+/* make the header row slightly darker */
+.header
+{
+  background: -webkit-linear-gradient(#e8e8e8, #d8d8d8); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#e8e8e8, #d8d8d8); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#e8e8e8, #d8d8d8); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#e8e8e8, #d8d8d8); /* Standard syntax */;
+}
+
+/* Make header items shorter */
+.header .col
+{
+  height: 100px
+}
+
+/* make each item in a song appear on the same line */
+/* also set static size */
+.col
+{
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+}
+
+/* make text appear centered vertically */
+.container
+{
+  height: inherit;
+  display: table-cell;
+  vertical-align: middle;
+  width: inherit;
+}
+
+/* make text appear centered horizontally */
+.container a, .container p, .container h1
+{
+  margin: 0px;
+  text-align: center;
+  width: inherit;
+}
+
+/* force anchor tags to break if they're too long to fit in one line */
+.container a
+{
+  display: block;
+  /* took this from the internet */
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word;
+}
+
+/* make the images fit in the allotted space, and just a little fancier */
+.cover-img
+{
+  width: inherit;
+  height: inherit;
+  box-shadow: 0px 0px 5px #555;
+}
+
+/* make the artist's name boldface */
+.artist
+{
+  font-weight: bold;
+}

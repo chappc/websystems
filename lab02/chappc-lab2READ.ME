@@ -1,0 +1,36 @@
+CSCI2960 LAB 2
+
+Chris Chappell
+
+Part 1.
+
+How I envisioned of the playlist was as an unordered list of songs, each song also being an unordered list of attributes, such as title, author, album, etc.  To make the html document semantically correct, I put an <html> tag, with a <head> and a <body>, and put the unordered list containing the playlist inside that.  The header of the playlist came first, describing each column was the first item in the list, after which followed actual songs.  Each item in each song was wrapped in a <div> to keep it contained and add structural support. (See Part 3.)  Images were made using the <img> tag and links were made using the <a> tag.  All tags were closed or self-closing.  Everything other than <html>, <head>, and <body> had at least one class describing it to make it expressive and to cut down on changes if ever one wanted to add or modify styles.  Last of all, I used the strict 4.01 html dtd to describe the document type.
+
+Part 2. (Ream.me)
+
+I cut down on layers of separation, but went with the same layout.  My root element was <playlist> and my first branches were <song-header> and multiple <song>s, containing the song header and songs respectively.  In each <song> and the <song-header>, there was a <title>, an <author>, an <album>, a <cover>, a <release-date>, a <genre>, and a <website>, containing the information described by their respective tags.  For <cover> and <website>, an <html:img> tag and a <html:a> tag were used to represent images and links with html syntax.  I used strict 1.0 xhtml dtd to describe the document type.
+
+Part 3.
+
+I used the classes from part 1 largely to code the styles for this part.  I made each song have its items on one line with a gradient background, centered the text in the area I gave it, and set the size of the images to fit inside their boundary.  I then made the header to be a slightly darker gradient, and put a shadow behind the whole playlist to give it some separation.  I also boldfaced the artists' names and put a subtle shadow behind the images as well.
+
+Some interesting things to note:
+
+- <li>s do not behave like <div>s with css.  I could not use vertical-align: middle on the <li>s with text to make the text appear in the middle of the <li>s but it worked for the <div>s when I added them in.  I would have never used <div>s if I hadn't had this issue.
+- A <li> containing an <ul> behaves abnormally when given a border.  Or possibly a <li> being displayed as a table-row cannot display a border-color correctly.  I could not for the life of me make the songs have borders when I tried to put the borders around the <li>s that contained them.  What made this stranger was that dev-tools showed the border existing and even would change its thickness, but it would never show up even when I changed its color, style, and thickness, in multiple configurations even specifying only one side, or separating them into individual attributes.
+- Any text without spaces or hyphens will go off the edge of the containing object or force it to be larger than its specified size if the text is too long in anchor tags.  I had to tell it both to display as a block and break words for it to fix that.
+- Using <image> instead of <img> was accepted by my browser as valid syntax.  Whodathunkit.
+
+Part 4.
+
+I used the descriptive xml tags to specify objects in the document.  It is somewhat simpler than the html syles but does the same basic thing: it arranges the songs in rows and puts the title, artist, album, etc. into columns.  I made the song title small, the artist blue, the album italics, and both the cover image and the website work as html objects.  I'm not sure what "the image should be last, not be part of the hyperlink" means.
+
+Some more interesting things to note:
+
+- From Part 3, the styles to fix the anchor overflow problem do not work.  It will also resize its parent regardless of the size specified for the parent.
+- Again, borders on the <song>s are empty.
+- Margins do not get rendered for <song>s.  The box model in dev-tools does not even show that the margin exists.
+- Items inside start at the very top of their parent even when the parent has padding or a border for <song>s.
+- Using <html:image> instead of <html:img> is not accepted by my browser.
+- I am convinced CSS has a rhyme and reason but the people in charge of making it reeally want us to think otherwise.
+- The lab document says we will receive credit for Part 3 both for this part and part 3.

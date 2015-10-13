@@ -1,0 +1,162 @@
+<html xmlns="http://www.w3.org/1999/xhtml" hola_ext_inject="disabled"><head>
+<style type="text/css">
+/* stolen from apache's inline css */
+body {background-color: #ffffff; color: #000000;}
+body, td, th, h1, h2 {font-family: sans-serif;}
+pre {margin: 0px; font-family: monospace;}
+a:link {color: #000099; text-decoration: none; background-color: #ffffff;}
+a:hover {text-decoration: underline;}
+table {border-collapse: collapse;}
+.center {text-align: center;}
+.center table { margin-left: auto; margin-right: auto; text-align: left;}
+.center th { text-align: center !important; }
+td, th { border: 1px solid #000000; font-size: 75%; vertical-align: baseline;}
+h1 {font-size: 150%;}
+h2 {font-size: 125%;}
+.p {text-align: left;}
+.e {background-color: #ccccff; font-weight: bold; color: #000000;}
+.h {background-color: #9999cc; font-weight: bold; color: #000000;}
+.v {background-color: #cccccc; color: #000000;}
+.vr {background-color: #cccccc; text-align: right; color: #000000;}
+img {border: 0px;}
+hr {width: 600px; background-color: #cccccc; border: 0px; height: 1px; color: #000000;}
+</style>
+</head>
+<body>
+<h1>
+CSCI2960 Lab 1
+</h1>
+<h2>
+1.<br/>
+</h2>
+<p>
+
+a) Setting up the *AMP Stack.
+<br/><br/>
+I installed the LAMP stack. (Since my computer runs ubuntu)<br/>
+<code>
+ $ sudo apt-get install lamp-server^
+</code>
+<br/><br/>
+Main (important) packages that were installed:<br/>
+ apache2, php5, mysql-server
+<br/><br/>
+I checked and the actual versions are apache 2.4.7, php 5.5.9, and mysql 5.5.44.
+<br/><br/>
+This happened a while ago, and I figured I might as well keep my installation.
+<br/><br/>
+b) Setting up phpMyAdmin.
+<br/><br/>
+Again, I had this installed already from some previous work I'd done.<br/>
+I did have to reset the password (since I'd forgotten the original),<br/>
+but that didn't take too much work.
+</p>
+<image src="img/phpMyAdmin.png" alt="Content of page when logged into phpMyAdmin"/>
+<p>
+<br/><br/>
+
+
+<h2>
+2.<br/>
+</h2>
+This is where things got interesting.<br/>
+I followed the directions, referencing the lecture where I had questions, and<br/>
+ended up with all the different parts put together. (At least I thought they<br/>
+were put together)
+<br/><br/>
+## Contents of /etc/hosts:<br/>
+<blockquote cite="/etc/hosts">
+<code>
+127.0.0.1       localhost<br/>
+127.0.0.1       lab01.csci2960<br/>
+127.0.0.1       bob-ThinkPad-T430<br/>
+<br/>
+# The following lines are desirable for IPv6 capable hosts<br/>
+::1     ip6-localhost ip6-loopback<br/>
+fe00::0 ip6-localnet<br/>
+ff00::0 ip6-mcastprefix<br/>
+ff02::1 ip6-allnodes<br/>
+ff02::2 ip6-allrouters<br/>
+</code>
+</blockquote>
+<br/><br/>
+httpd.conf did not exist, but there was a file called apache2.conf.<br/>
+Originally, I had put my virtual host configuration in there,<br/>
+but it turns out apache2.conf is the global configuration, to be modified<br/>
+only by apache when it updates.  On debian based linux systems running<br/>
+LAMP, it seems there is a much more structured hierarchy of configuration<br/>
+files than on, say, Windows running XAMPP.
+<br/><br/>
+It turns out you get to create your own file for each site configuration<br/>
+you want!  They get loaded based on whether they are enabled, or not.
+<br/><br/>
+To do this, you need to create a *.conf file inside /etc/apache2/sites-available/<br/>
+and put your <code>&lt;VirtualHost *&gt; ... &lt;VirtualHost&gt;</code> code<br/>
+inside.
+<br/><br/>
+Then, from the console, you need to call<br/><br/>
+<code>
+$ sudo a2ensite
+</code>
+<br/><br/>
+and select your site's .conf file.  This enables the website.<br/>
+To disable a site, you use <code>a2dissite</code>.
+<br/><br/>
+My Virtual host configuration:<br/><br/>
+<blockquote cite="/etc/apache2/sites-available/001-lab01.conf">
+<code>
+&lt;VirtualHost 127.0.0.1:80&gt;<br/>
+        # The ServerName directive sets the request scheme, hostname and port that<br/>
+        # the server uses to identify itself. This is used when creating<br/>
+        # redirection URLs. In the context of virtual hosts, the ServerName<br/>
+        # specifies what hostname must appear in the request's Host: header to<br/>
+        # match this virtual host. For the default virtual host (this file) this<br/>
+        # value is not decisive as it is used as a last resort host regardless.<br/>
+        # However, you must set it for any further virtual host explicitly.<br/>
+<br/>
+        ServerName lab01.csci2960<br/>
+<br/>
+        ServerAdmin bob@localhost<br/>
+        DocumentRoot /var/www/CSCI2960/lab01<br/>
+<br/>
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,<br/>
+        # error, crit, alert, emerg.<br/>
+        # It is also possible to configure the loglevel for particular<br/>
+        # modules, e.g.<br/>
+        #LogLevel info ssl:warn<br/>
+<br/>
+        ErrorLog ${APACHE_LOG_DIR}/error.log<br/>
+        CustomLog ${APACHE_LOG_DIR}/access.log combined<br/>
+<br/>
+        # For most configuration files from conf-available/, which are<br/>
+        # enabled or disabled at a global level, it is possible to<br/>
+        # include a line for only one particular virtual host. For example the<br/>
+        # following line enables the CGI configuration for this host only<br/>
+        # after it has been globally disabled with "a2disconf".<br/>
+        #Include conf-available/serve-cgi-bin.conf<br/>
+<br/>
+        Include conf-available/csci2960.conf<br/>
+&lt;/VirtualHost&gt;<br/>
+<br/>
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet<br/>
+</code>
+</blockquote>
+<br/><br/>
+Some of this was stolen from the default .conf file.
+<br/><br/>
+Now, the reason I had so much difficulty running the site, as it turns out,<br/>
+is that my Dropbox folder, which I had decided to put the site material in,<br/>
+did not have execute permissions as a folder for users labelled "other."
+<br/><br/>
+Basically, apache with its www-html user would come in and try to access my<br/>
+index.php file but would be denied.  I finally found that after searching<br/>
+the error logs, but I'm somewhat glad that I didn't find it right away,<br/>
+since I might have ended up putting all my site configurations in apache2.conf<br/>
+and having them get blown away the next time I updated apache.
+<br/><br/>
+Thanks a bunch!
+
+</p>
+<image src="img/index.png" alt="phpinfo()"/>
+
+</body></html>

@@ -1,0 +1,80 @@
+/*
+ * Code by Chris Chappell
+ *
+ * CSS for chappc-lab3part3.xml
+ */
+
+/* set font for the whole playlist */
+playlist
+{
+  font-family: "Helvetica" "Ariel" sans-serif;
+  width: 1050px;
+}
+
+/* set font size, weight, dimensions, and background for header */
+song-header
+{
+  font-size: 2em;
+  font-weight: bold;
+  background: #ccc;
+  display: table-row;
+  height: 100px;
+}
+
+/* set song to display on one line, with height and background */
+song
+{
+  display: table-row;
+  height: 150px;
+  background: #eee;
+  border-top: solid #888 5px;
+}
+
+/* set dimensions and center text */
+title, artist, album, cover, release-date, genre, website
+{
+  display: table-cell;
+  vertical-align: middle;
+  height: inherit;
+  width: 150px;
+  text-align: center;
+  padding: 5px;
+}
+
+/* make artist bold */
+song artist
+{
+  color: blue;
+}
+
+/* make title smaller and blue */
+song title
+{
+  font-size: 0.8em;
+}
+
+/* make album title italicised */
+song album
+{
+  font-style: italic;
+}
+
+/* make anchor tags break inside their container */
+song website a
+{
+  display: block;
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word;
+}
+
+/* set size for images */
+img
+{
+  height: inherit;
+  width: inherit;
+}
+
+

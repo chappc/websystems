@@ -1,0 +1,28 @@
+html
+{
+  font-family: "Courier", monospace;
+};
+
+li
+{
+  float: left;
+};
+
+image
+{
+  width: 100px;
+  height: 75px;
+};
+
+h1
+{
+  float: center;
+  margin: auto;
+  border-bottom-width: 1px;
+  border-bottom-color: #000;
+};
+
+p
+{
+  color: #123456;
+};

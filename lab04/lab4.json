@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Never Gonna Give You Up",
+    "artist": "Rick Astley",
+    "album": "Whenever You Need Somebody",
+    "cover": "img/astley-whenever.jpg",
+    "release": "16 November 1987",
+    "genre": ["Pop", "Dance-pop", "Blue-eyed Soul"],
+    "website": "http://www.rickastley.co.uk"
+  },
+  {
+    "title": "Scatman",
+    "artist": "Scatman John",
+    "album": "Scatman's World",
+    "cover": "img/scatman-jam.jpg",
+    "release": "29 November 1994",
+    "genre": ["Pop", "Eurodance"],
+    "website": "http://www.discogs.com/artist/23386-Scatman-John"
+  },
+  {
+    "title": "Sandstorm",
+    "artist": "Darude",
+    "album": "Before the Storm",
+    "cover": "img/darude-before.jpg",
+    "release": "14 November 1999",
+    "genre": ["Trance", "Electronic Dance"],
+    "website": "http://www.darude.com/"
+  }
+]
