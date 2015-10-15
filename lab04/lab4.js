@@ -17,7 +17,7 @@ $("document").ready( function()
     function makeColumn ( className, inner )
     {
       var col = makeElement( "LI", "col " + className );
-      container = makeElement( "DIV", "container" );
+      var container = makeElement( "DIV", "container" );
       container.innerHTML = inner;
       col.appendChild( container );
       return col;
@@ -38,8 +38,25 @@ $("document").ready( function()
       return col_c;
     }
 
+    function parseContent ( song )
+    {
+      var output_song = [
+        "<p>" + song.title + "</p>",
+        "<p>" + song.artist + "</p>", // artist
+        "<p>" + song.album + "</p>", // album
+        "<img src=\"" + song.cover + "\" class=\"cover-img\" />", // cover
+        "<p>" + song.release +"</p>", // release
+        "<p>" + song.genre.join(", ") + "</p>", // genres
+        "<a href=\"" + song.website + "\">" + song.website/*.match("/:\/\/(*)\//")[0]*/ + "</a>",
+                     // website
+      ];
+      return output_song;
+    }
+
     function readJSON ( playlist )
     {
+      console.log(playlist);
+
       // create container list
       var row_c = makeElement( "UL", "row-container" );
       // create header
@@ -59,19 +76,17 @@ $("document").ready( function()
       row_c.appendChild(row_h);
       for ( var i = 0; i < playlist.length; ++i )
       {
-        song = playlist[i];
+        var row = makeElement( "LI", "row" );
         // process each song from the playlist
+        row.appendChild(makeRow(parseContent(playlist[i])));
+        row_c.appendChild(row);
       }
       // postprocessing add material to the document.
+      document.body.innerHTML = "";
+      document.body.appendChild(row_c);
     }
 
-    $.ajax
-    ({
-      url: "lab4.json",
-      dataType: "json",
-      cache: false
-    })
-    .done( readJSON );
+    $.get( "lab4.json", readJSON );
   }
 
   $("#site").click( loadAlbum );
